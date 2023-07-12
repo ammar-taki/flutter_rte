@@ -29,7 +29,7 @@ class HtmlEditor extends StatefulWidget {
 
   /// Shortcut for onChanged callback
   final void Function(String?)? onChanged;
-  
+
   /// Hint text alignment
   /// Defaults to [TextAlign.start]
   final TextAlign? hintTextAlign;
@@ -185,18 +185,15 @@ class _HtmlEditorState extends State<HtmlEditor> with TickerProviderStateMixin {
           // on web - wait intil initialized
           if (kIsWeb && _controller.initialized || !kIsWeb)
             Expanded(
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: Stack(
-                  children: [
-                    _backgroundWidget(),
-                    _hintTextWidget(),
-                    child,
-                    _ScrollPatch(_controller),
-                    _sttDictationPreview(),
-                    _faultWidget
-                  ],
-                ),
+              child: Stack(
+                children: [
+                  Directionality(textDirection: TextDirection.ltr, child: _backgroundWidget()),
+                  _hintTextWidget(),
+                  child,
+                  Directionality(textDirection: TextDirection.ltr, child: _ScrollPatch(_controller)),
+                  Directionality(textDirection: TextDirection.ltr, child: _sttDictationPreview()),
+                  Directionality(textDirection: TextDirection.ltr, child: _faultWidget),
+                ],
               ),
             ),
         ],
