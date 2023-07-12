@@ -15,6 +15,7 @@ class HtmlEditor extends StatefulWidget {
     this.minHeight,
     this.expandFullHeight = false,
     this.hint,
+    this.hintTextAlign,
     this.initialValue,
     this.onChanged,
     this.isReadOnly,
@@ -28,6 +29,10 @@ class HtmlEditor extends StatefulWidget {
 
   /// Shortcut for onChanged callback
   final void Function(String?)? onChanged;
+  
+  /// Hint text alignment
+  /// Defaults to [TextAlign.start]
+  final TextAlign? hintTextAlign;
 
   /// Provides access to all options and features
   final HtmlEditorController? controller;
@@ -330,7 +335,7 @@ class _HtmlEditorState extends State<HtmlEditor> with TickerProviderStateMixin {
                         .textTheme
                         .bodyMedium
                         ?.color
-                        ?.withOpacity(.3))),
+                        ?.withOpacity(.3)),textAlign: widget.hintTextAlign),
       ));
     } else {
       return const SizedBox();
